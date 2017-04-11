@@ -12,6 +12,7 @@ npm install react-ui-tree --save
 ``` javascript
 <Tree
   paddingLeft={20}              // left padding for children nodes in pixels
+  draggable={true}              // whether nodes should be draggable
   tree={this.state.tree}        // tree object
   onChange={this.handleChange}  // onChange(tree) tree object changed
   renderNode={this.renderNode}  // renderNode(node) return react element
