@@ -194,9 +194,12 @@ module.exports = React.createClass({
     });
   },
   dragEnd: function dragEnd() {
-    var nodeId = this.state.dragging.id;
-    var index = this.state.tree.getIndex(nodeId);
-    var node = index.node;
+    var node = null;
+    if (this.state.dragging.id) {
+      var nodeId = this.state.dragging.id;
+      var index = this.state.tree.getIndex(nodeId);
+      node = index.node;
+    }
 
     this.setState({
       dragging: {
