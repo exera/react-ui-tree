@@ -32,7 +32,6 @@ var Node = React.createClass({
 
     if (index.children && index.children.length) {
       var childrenStyles = {};
-      if (index.node.collapsed) childrenStyles.display = 'none';
       childrenStyles['paddingLeft'] = this.props.paddingLeft + 'px';
 
       return React.createElement(
@@ -73,7 +72,7 @@ var Node = React.createClass({
         this.renderCollapse(),
         tree.renderNode(node)
       ),
-      this.renderChildren()
+      node.collapsed ? null : this.renderChildren()
     );
   },
   handleCollapse: function handleCollapse(e) {
