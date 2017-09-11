@@ -122,7 +122,7 @@ module.exports = React.createClass({
       if (!node.collapsed && node.children && node.children.length > 0) {
         node.collapsed = true;
         tree.updateNodesPosition();
-    
+
         this.setState({
           tree: tree
         });
@@ -160,8 +160,16 @@ module.exports = React.createClass({
       // right
       if (index.prev) {
         var prevNode = tree.getIndex(index.prev).node;
-        if (!prevNode.collapsed && !prevNode.leaf) {
-          newIndex = tree.move(index.id, index.prev, 'append');
+
+        // prevNode collapsed uncollapse it
+        if (!prevNode.leaf) {
+          if (prevNode.collapsed) {
+            prevNode.collapsed = false;
+            tree.updateNodesPosition();
+            newIndex = tree.move(index.id, index.prev, 'prepend');
+          } else {
+            newIndex = tree.move(index.id, index.prev, 'append');
+          }
         }
       }
     }
