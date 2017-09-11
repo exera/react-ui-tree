@@ -7,7 +7,7 @@ var ReactDOM = require('react-dom');
 var Node = React.createClass({
   displayName: 'UITreeNode',
 
-  renderCollapse: function renderCollapse() {
+  renderCollapse: function renderCollapse(depth) {
     var index = this.props.index;
 
     if (index.children && index.children.length) {
@@ -15,10 +15,12 @@ var Node = React.createClass({
 
       return React.createElement('span', {
         className: cx('collapse', collapsed ? 'caret-right' : 'caret-down'),
+        style: { left: this.props.paddingLeft * (depth - 1) },
         onMouseDown: function onMouseDown(e) {
           e.stopPropagation();
         },
-        onClick: this.handleCollapse });
+        onClick: this.handleCollapse
+      });
     }
 
     return null;
@@ -64,14 +66,16 @@ var Node = React.createClass({
 
     return React.createElement(
       'div',
-      { className: cx('m-node', {
+      {
+        className: cx('m-node', {
           'placeholder': index.id === dragging
-        }), style: styles },
+        }), style: styles
+      },
       React.createElement(
         'div',
         { className: 'inner', ref: 'inner', onMouseDown: this.handleMouseDown },
-        this.renderCollapse(),
-        tree.renderNode(node,depth)
+        this.renderCollapse(depth),
+        tree.renderNode(node, depth)
       ),
       node.collapsed ? null : this.renderChildren()
     );
