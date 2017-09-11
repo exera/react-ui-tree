@@ -16,7 +16,7 @@ var App = React.createClass({
     };
   },
 
-  renderNode(node) {
+  renderNode(node, depth) {
     return (
       <span className={cx('node', {
         'is-active': node === this.state.active
