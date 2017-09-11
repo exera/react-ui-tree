@@ -9,13 +9,14 @@ var Node = React.createClass({
 
   renderCollapse: function renderCollapse(depth) {
     var index = this.props.index;
+    var isRoot = !this.props.index.parent;
 
-    if (index.children && index.children.length) {
+    if (!isRoot && index.children && index.children.length) {
       var collapsed = index.node.collapsed;
 
       return React.createElement('span', {
         className: cx('collapse', collapsed ? 'caret-right' : 'caret-down'),
-        style: { left: this.props.paddingLeft * (depth - 1) },
+        style: { left: (this.props.paddingLeft * (depth - 1)) - 10 },
         onMouseDown: function onMouseDown(e) {
           e.stopPropagation();
         },
@@ -34,7 +35,7 @@ var Node = React.createClass({
 
     if (index.children && index.children.length) {
       var childrenStyles = {};
-      childrenStyles['paddingLeft'] = this.props.paddingLeft + 'px';
+      //childrenStyles['paddingLeft'] = this.props.paddingLeft + 'px';
 
       return React.createElement(
         'div',
@@ -88,8 +89,9 @@ var Node = React.createClass({
   handleMouseDown: function handleMouseDown(e) {
     var nodeId = this.props.index.id;
     var dom = this.refs.inner;
+    var isRoot = !this.props.index.parent;
 
-    if (this.props.onDragStart) {
+    if (!isRoot && this.props.onDragStart) {
       this.props.onDragStart(nodeId, dom, e);
     }
   }
