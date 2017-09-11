@@ -12,7 +12,8 @@ module.exports = React.createClass({
     paddingLeft: React.PropTypes.number,
     draggable: React.PropTypes.bool,
     renderNode: React.PropTypes.func.isRequired,
-    lockAxis: React.PropTypes.bool
+    lockAxis: React.PropTypes.bool,
+    canDrop: React.PropTypes.func
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -161,8 +162,9 @@ module.exports = React.createClass({
       if (index.prev) {
         var prevNode = tree.getIndex(index.prev).node;
 
-        // prevNode collapsed uncollapse it
-        if (!prevNode.leaf) {
+        var canDrop = this.props.canDrop || function () { return true };
+        if (!prevNode.leaf && canDrop && canDrop(prevNode, index.node)) {
+          // prevNode collapsed uncollapse it
           if (prevNode.collapsed) {
             prevNode.collapsed = false;
             tree.updateNodesPosition();
