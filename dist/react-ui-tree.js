@@ -12,7 +12,7 @@ module.exports = React.createClass({
     paddingLeft: React.PropTypes.number,
     draggable: React.PropTypes.bool,
     renderNode: React.PropTypes.func.isRequired,
-    lockAxis: React.PropTypes.bool,
+    lockAxis: React.PropTypes.bool
   },
 
   getDefaultProps: function getDefaultProps() {
