@@ -11,7 +11,8 @@ module.exports = React.createClass({
     tree: React.PropTypes.object.isRequired,
     paddingLeft: React.PropTypes.number,
     draggable: React.PropTypes.bool,
-    renderNode: React.PropTypes.func.isRequired
+    renderNode: React.PropTypes.func.isRequired,
+    lockAxis: React.PropTypes.bool,
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -49,7 +50,7 @@ module.exports = React.createClass({
       var draggingIndex = tree.getIndex(dragging.id);
       var draggingStyles = {
         top: dragging.y,
-        left: dragging.x,
+        left: this.props.lockAxis ? 0 : dragging.x,
         width: dragging.w
       };
 
