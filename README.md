@@ -16,6 +16,7 @@ npm install react-ui-tree --save
   tree={this.state.tree}        // tree object
   onChange={this.handleChange}  // onChange(tree) tree object changed
   renderNode={this.renderNode}  // renderNode(node,depth) return react element
+  lockAxis={true}               // whether x axis should be locked when dragging
 />
 
 // a sample tree object
