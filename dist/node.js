@@ -57,6 +57,7 @@ var Node = React.createClass({
   render: function render() {
     var tree = this.props.tree;
     var index = this.props.index;
+    var depth = this.props.index.left;
     var dragging = this.props.dragging;
     var node = index.node;
     var styles = {};
@@ -70,7 +71,7 @@ var Node = React.createClass({
         'div',
         { className: 'inner', ref: 'inner', onMouseDown: this.handleMouseDown },
         this.renderCollapse(),
-        tree.renderNode(node)
+        tree.renderNode(node,depth)
       ),
       node.collapsed ? null : this.renderChildren()
     );
